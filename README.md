@@ -22,6 +22,6 @@ JavaScript - Interactive features and dynamic content
 
 Feel free to reach out if you have any questions or feedback!
 
-Email: your-irungusam8@gmail.com
+Email: irungusam8@gmail.com
 
 GitHub: https://github.com/Irungusam
