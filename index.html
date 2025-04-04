@@ -48,7 +48,7 @@
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
                 <div class="about-image">
-                    <img src="./IMG_20231023_153659_edited.jpg" alt="Profile Picture">
+                    <img src="./assets/IMG_20231023_153659_edited.jpg" alt="Profile Picture">
                 </div>
                 <div class="about-text">
                     <p>I'm a passionate web developer with a strong interest in creating attractive, user-friendly websites. I love solving complex problems, optimizing code for efficiency, and continuously exploring new technologies. Whether it's developing full-stack applications, enhancing UI/UX, or integrating AI-powered features, I'm always up for a challenge.</p>
@@ -67,7 +67,7 @@
                             <span>Undergraduate Bachelors of Business Information Technology at Meru University of Science and Technology.</span>
                         </div>
                     </div>
-                    
+                    <a href="#" class="btn primary-btn" id="download-cv">Download CV</a>
                 </div>
             </div>
         </div>
@@ -345,7 +345,27 @@
                         
                     </div>
                 </div>
-                
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn primary-btn">Send Message</button>
+                    </form>
+                    <div id="form-message"></div>
             </div>
         </div>
     </section>

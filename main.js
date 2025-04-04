@@ -3,77 +3,82 @@ document.addEventListener("DOMContentLoaded", function () {
   const navMenu = document.querySelector(".nav-menu");
   const navLinks = document.querySelectorAll(".nav-link");
   const backToTop = document.getElementById("back-to-top");
+  const contactForm = document.getElementById("contact-form");
+  const formMessage = document.getElementById("form-message");
+  
+  const projectCards = document.querySelectorAll(".project-card");
+  const downloadCvBtn = document.getElementById("download-cv");
 
-  mobileMenu.addEventListener("click", function () {
+  mobileMenu.onclick = function () {
     navMenu.classList.toggle("active");
     mobileMenu.classList.toggle("active");
-  });
+  };
 
   navLinks.forEach((link) => {
-    link.addEventListener("click", function () {
+    link.onclick = function () {
       navMenu.classList.remove("active");
       mobileMenu.classList.remove("active");
-
       navLinks.forEach((navLink) => navLink.classList.remove("active"));
-      this.classList.add("active");
-    });
+      link.classList.add("active");
+    };
   });
 
-  window.addEventListener("scroll", function () {
+  window.onscroll = function () {
     backToTop.classList.toggle("visible", window.scrollY > 300);
-
-    const sections = document.querySelectorAll("section");
-    let current = "";
-
-    sections.forEach((section) => {
-      if (pageYOffset >= section.offsetTop - 300) {
-        current = section.getAttribute("id");
-      }
-    });
-
-    navLinks.forEach((link) => {
-      link.classList.toggle(
-        "active",
-        link.getAttribute("href") === `#${current}`
-      );
-    });
-
     document.querySelector("header").style.boxShadow =
       window.scrollY > 0 ? "0 5px 15px rgba(0, 0, 0, 0.1)" : "none";
-  });
+  };
 
-  function animateSkillBoxes() {
-    const skillsSection = document.querySelector(".skills");
-    const skillBoxes = document.querySelectorAll(".skill-box");
+  
+  if (contactForm) {
+    contactForm.onsubmit = function (e) {
+      e.preventDefault();
+      let name = document.getElementById("name").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let subject = document.getElementById("subject").value.trim();
+      let message = document.getElementById("message").value.trim();
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            skillBoxes.forEach((box, index) => {
-              setTimeout(() => {
-                box.style.opacity = 1;
-                box.style.transform = "translateY(0)";
-              }, 100 * index);
-            });
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
+      if (!name || !email || !subject || !message) {
+        showMessage("Please fill in all fields", "error");
+        return;
+      }
 
-    observer.observe(skillsSection);
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showMessage("Please enter a valid email", "error");
+        return;
+      }
+
+      showMessage("Message sent successfully!", "success");
+      contactForm.reset();
+      setTimeout(() => (formMessage.style.display = "none"), 5000);
+    };
   }
 
-  const skillBoxes = document.querySelectorAll(".skill-box");
-  skillBoxes.forEach((box) => {
-    Object.assign(box.style, {
-      opacity: 0,
-      transform: "translateY(20px)",
-      transition: "opacity 0.5s ease, transform 0.5s ease",
-    });
-  });
+  function showMessage(msg, type) {
+    formMessage.textContent = msg;
+    formMessage.className = type;
+    formMessage.style.display = "block";
+  }
 
-  animateSkillBoxes();
+  if (downloadCvBtn) {
+    downloadCvBtn.onclick = function (e) {
+      e.preventDefault();
+      const link = document.createElement("a");
+      link.href = "./assets/resume.pdf";
+      link.download = "Sam_CV.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+  }
+
+  window.addEventListener("scroll", function () {
+    let skillSection = document.querySelector(".skills");
+    let skillLevels = document.querySelectorAll(".skill-level");
+    if (skillSection.getBoundingClientRect().top < window.innerHeight / 1.3) {
+      skillLevels.forEach(
+        (level) => (level.style.width = level.getAttribute("data-level"))
+      );
+    }
+  });
 });

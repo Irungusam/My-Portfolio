@@ -426,7 +426,7 @@ header {
 }
 
 .contact-content {
-  display: flex;
+  display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 3rem;
   align-items: center;
@@ -477,6 +477,59 @@ header {
   background-color: var(--primary-color);
   color: white;
   transform: translateY(-3px);
+}
+
+.contact-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.2);
+}
+
+#form-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  display: none;
+}
+
+#form-message.success {
+  background-color: #d4edda;
+  color: var(--success-color);
+  display: block;
+}
+
+#form-message.error {
+  background-color: #f8d7da;
+  color: var(--danger-color);
+  display: block;
 }
 
 /* Footer */
